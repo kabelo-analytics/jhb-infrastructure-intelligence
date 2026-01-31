@@ -1,24 +1,13 @@
-# Phase 1 Report (Template)
 
-This file is generated/updated by the Phase 1 notebooks and scripts.
+# Phase 1 – KPI Summary (Johannesburg Municipal Infrastructure)
 
-## Executive Summary
-- (Write 3–5 bullets: backlog, SLA, hotspots, performance)
+## Key Metrics
+- Total incidents analysed: 200,000
+- Median time-to-first-response (hours): 24.00
+- Median time-to-repair (days): 3.55
+- SLA breach rate: 16.4%
 
-## Key KPIs
-- Median time-to-first-response:
-- Mean time-to-repair:
-- SLA breach rate:
-- Backlog trend:
-
-## Hotspots
-- Top wards:
-- Top suburbs:
-- Top street segments:
-
-## Performance (Crews/Contractors)
-- Best vs worst (SLA breach):
-- Repair outcomes:
-
-## Recommendations
-- (Data-driven operational actions)
+## Generated Figures
+- reports/figures/backlog_trend.png
+- reports/figures/first_response_by_type.png
+- reports/figures/top_wards.png
