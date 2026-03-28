@@ -8,7 +8,6 @@ on:
 permissions:
   pages: write
   contents: read
-  administration: write
 
 jobs:
   enable-pages:
