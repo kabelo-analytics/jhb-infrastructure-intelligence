@@ -3,57 +3,50 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kabelo · JHB Infrastructure Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<title>JHB Infrastructure Intelligence · Municipal Analytics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
-  --bg: #080c12;
-  --surface: rgba(255,255,255,0.04);
-  --surface-hover: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-  --accent: #00e5a0;
-  --accent2: #ff6b35;
-  --accent3: #4fc3f7;
-  --text: #e8edf5;
-  --muted: #7a8799;
-  --card-bg: rgba(14,20,32,0.85);
-  --glow: 0 0 40px rgba(0,229,160,0.12);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --warn: #b45309;
+  --info: #0369a1;
+  --text: #1a202c;
+  --muted: #64748b;
+  --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'DM Sans',sans-serif;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   font-size:16px;
   line-height:1.65;
   overflow-x:hidden;
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
-
 /* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 5%;
-  background:rgba(8,12,18,0.8);
-  backdrop-filter:blur(20px);
+  padding:14px 5%;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
 }
 .nav-logo{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;
-  color:var(--accent);letter-spacing:-0.02em;
+  font-weight:700;font-size:.95rem;
+  color:var(--accent);letter-spacing:-.01em;white-space:nowrap;
 }
-.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap;align-items:center}
 .nav-links a{
-  color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:500;
-  transition:color .2s;letter-spacing:.02em;
+  color:var(--muted);text-decoration:none;font-size:.84rem;font-weight:500;
+  transition:color .15s;white-space:nowrap;
 }
 .nav-links a:hover{color:var(--text)}
 
@@ -61,152 +54,126 @@ nav{
 #hero{
   min-height:100vh;
   display:flex;align-items:center;
-  padding:120px 5% 80px;
-  position:relative;
-  overflow:hidden;
+  padding:100px 5% 80px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
 }
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,229,160,0.06) 0%, transparent 70%),
-             radial-gradient(ellipse 50% 50% at 20% 80%, rgba(79,195,247,0.05) 0%, transparent 60%);
-}
-.hero-grid{
-  position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size:60px 60px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
-}
-.hero-content{
-  position:relative;z-index:1;
-  max-width:780px;
-}
+.hero-content{max-width:800px}
 .hero-tag{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,229,160,0.1);
-  border:1px solid rgba(0,229,160,0.25);
+  background:rgba(37,99,235,0.07);
+  border:1px solid rgba(37,99,235,0.18);
   border-radius:100px;
-  padding:6px 16px;
-  font-size:.8rem;font-weight:500;color:var(--accent);
-  letter-spacing:.08em;text-transform:uppercase;
-  margin-bottom:28px;
-  animation:fadeUp .8s ease both;
+  padding:5px 14px;
+  font-size:.75rem;font-weight:600;color:var(--accent);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:24px;
 }
 .hero-tag::before{
   content:'';width:6px;height:6px;border-radius:50%;
   background:var(--accent);animation:pulse 2s infinite;
 }
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 h1.hero-name{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(2.8rem,6vw,5rem);
+  font-size:clamp(1.9rem,4vw,3.2rem);
   font-weight:800;
-  line-height:1.05;
-  letter-spacing:-.03em;
+  line-height:1.1;
+  letter-spacing:-.025em;
   margin-bottom:8px;
-  animation:fadeUp .8s .1s ease both;
+  color:var(--text);
 }
 h1.hero-name span{color:var(--accent)}
 .hero-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(1rem,2vw,1.3rem);
+  font-size:.88rem;
   font-weight:600;
   color:var(--muted);
-  letter-spacing:.06em;
+  letter-spacing:.05em;
   text-transform:uppercase;
-  margin-bottom:28px;
-  animation:fadeUp .8s .2s ease both;
+  margin-bottom:20px;
 }
 .hero-statement{
-  font-size:clamp(1.05rem,1.8vw,1.2rem);
-  color:rgba(232,237,245,.75);
+  font-size:clamp(.98rem,1.5vw,1.08rem);
+  color:var(--muted);
   max-width:580px;
-  margin-bottom:44px;
-  font-weight:300;
-  animation:fadeUp .8s .3s ease both;
+  margin-bottom:36px;
+  font-weight:400;
+  line-height:1.8;
 }
-.hero-statement strong{color:var(--text);font-weight:500}
-.hero-ctas{
-  display:flex;gap:16px;flex-wrap:wrap;
-  animation:fadeUp .8s .4s ease both;
-}
+.hero-statement strong{color:var(--text);font-weight:600}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .btn-primary{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--accent);color:#080c12;
-  padding:14px 28px;border-radius:8px;
-  font-weight:700;font-size:.9rem;letter-spacing:.02em;
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#ffffff;
+  padding:11px 22px;border-radius:7px;
+  font-weight:600;font-size:.9rem;
   text-decoration:none;
-  transition:transform .2s, box-shadow .2s;
-  box-shadow:0 0 30px rgba(0,229,160,0.3);
+  transition:background .15s,transform .15s;
+  box-shadow:0 2px 8px rgba(37,99,235,0.2);
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,229,160,0.4)}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
 .btn-secondary{
-  display:inline-flex;align-items:center;gap:10px;
-  background:transparent;color:var(--text);
-  padding:14px 28px;border-radius:8px;
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface);color:var(--text);
+  padding:11px 22px;border-radius:7px;
   border:1px solid var(--border);
   font-weight:500;font-size:.9rem;
   text-decoration:none;
-  transition:border-color .2s,background .2s;
+  transition:border-color .15s,color .15s;
 }
-.btn-secondary:hover{border-color:rgba(255,255,255,0.2);background:var(--surface)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
 .hero-stats{
-  position:absolute;right:5%;top:50%;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:20px;
-  animation:fadeLeft .8s .5s ease both;
+  display:flex;gap:16px;flex-wrap:wrap;margin-top:44px;
 }
 .stat-card{
-  background:var(--card-bg);
+  background:var(--bg);
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:20px 24px;
-  backdrop-filter:blur(20px);
-  text-align:right;
-  min-width:160px;
+  border-radius:10px;
+  padding:16px 22px;
+  box-shadow:var(--shadow);
+  min-width:130px;
 }
 .stat-card .stat-num{
-  font-family:'Syne',sans-serif;
-  font-size:1.8rem;font-weight:800;color:var(--accent);
+  font-size:1.55rem;font-weight:800;color:var(--accent);
+  font-variant-numeric:tabular-nums;display:block;
 }
 .stat-card .stat-label{
-  font-size:.75rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;
+  font-size:.7rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:2px;
 }
 
 /* SECTIONS */
-section{padding:100px 5%}
+section{padding:80px 5%}
+section:nth-child(even){background:var(--surface)}
 .section-label{
-  font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--accent);font-weight:600;margin-bottom:12px;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin-bottom:10px;
 }
 .section-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-size:clamp(1.4rem,2.5vw,2rem);
   font-weight:800;
-  line-height:1.1;
+  line-height:1.15;
   letter-spacing:-.02em;
-  margin-bottom:20px;
+  margin-bottom:14px;
+  color:var(--text);
 }
 .section-sub{
-  color:var(--muted);font-size:1rem;max-width:560px;
-  font-weight:300;margin-bottom:60px;
+  color:var(--muted);font-size:.98rem;max-width:560px;
+  margin-bottom:44px;line-height:1.75;
 }
 
-/* PROBLEM SECTION */
-#problem{background:linear-gradient(180deg,var(--bg) 0%,rgba(14,22,36,0.6) 100%)}
+/* PROBLEM */
 .problem-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;
 }
 .problem-text p{
-  color:rgba(232,237,245,.7);line-height:1.8;margin-bottom:20px;font-weight:300;font-size:1.05rem;
+  color:var(--muted);line-height:1.8;margin-bottom:18px;font-size:1rem;
 }
-.problem-text p strong{color:var(--text);font-weight:500}
-.problem-metrics{display:flex;flex-direction:column;gap:16px}
+.problem-text p strong{color:var(--text);font-weight:600}
+.problem-metrics{display:flex;flex-direction:column;gap:12px}
 .metric-bar{
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:12px;padding:20px 24px;
-  backdrop-filter:blur(20px);
+  border-radius:10px;padding:16px 20px;
+  box-shadow:var(--shadow);
   position:relative;overflow:hidden;
 }
 .metric-bar::before{
@@ -214,258 +181,229 @@ section{padding:100px 5%}
   position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--accent);
 }
-.metric-bar.warn::before{background:var(--accent2)}
-.metric-bar.info::before{background:var(--accent3)}
-.metric-bar h4{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text)}
-.metric-bar span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.metric-bar p{font-size:.9rem;color:rgba(232,237,245,.6);margin-top:4px}
+.metric-bar.warn::before{background:var(--warn)}
+.metric-bar.info::before{background:var(--info)}
+.metric-bar h4{font-size:1.35rem;font-weight:800;color:var(--text)}
+.metric-bar span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.metric-bar p{font-size:.86rem;color:var(--muted);margin-top:4px;line-height:1.5}
 
 /* DATASET */
 .dataset-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;
-  margin-top:48px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;
+  margin-top:36px;
 }
 .dataset-card{
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:14px;padding:28px 24px;
-  backdrop-filter:blur(20px);
-  transition:border-color .25s,transform .25s;
-  position:relative;overflow:hidden;
+  border-radius:12px;padding:22px 18px;
+  box-shadow:var(--shadow);
+  transition:box-shadow .2s,transform .2s;
 }
-.dataset-card:hover{border-color:rgba(0,229,160,0.3);transform:translateY(-4px)}
-.dataset-card .icon{
-  font-size:1.8rem;margin-bottom:14px;display:block;
-}
-.dataset-card h4{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
-  margin-bottom:8px;letter-spacing:-.01em;
-}
-.dataset-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
+.dataset-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.dataset-card .icon{font-size:1.4rem;margin-bottom:10px;display:block}
+.dataset-card h4{font-weight:700;font-size:.92rem;margin-bottom:5px;color:var(--text)}
+.dataset-card p{font-size:.82rem;color:var(--muted);line-height:1.6}
 .dataset-card .badge{
-  display:inline-block;margin-top:12px;
-  background:rgba(0,229,160,0.1);
-  border:1px solid rgba(0,229,160,0.2);
+  display:inline-block;margin-top:9px;
+  background:rgba(37,99,235,0.07);
+  border:1px solid rgba(37,99,235,0.14);
   color:var(--accent);
-  font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
-  padding:3px 10px;border-radius:100px;font-weight:600;
+  font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 8px;border-radius:100px;font-weight:600;
 }
 
 /* PIPELINE */
-#pipeline{background:rgba(10,16,26,0.8)}
 .pipeline-flow{
   display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:0;margin-bottom:60px;
-  position:relative;
+  flex-wrap:wrap;gap:0;margin-bottom:44px;
 }
 .pipe-step{
   display:flex;flex-direction:column;align-items:center;
   text-align:center;
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:28px 22px;
-  min-width:155px;
-  backdrop-filter:blur(20px);
-  position:relative;
-  z-index:1;
-  transition:border-color .25s,transform .25s;
+  border-radius:12px;
+  padding:22px 16px;
+  min-width:140px;
+  box-shadow:var(--shadow);
+  position:relative;z-index:1;
+  transition:box-shadow .2s,transform .2s;
 }
-.pipe-step:hover{border-color:rgba(0,229,160,0.35);transform:translateY(-3px)}
+.pipe-step:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
 .pipe-step .step-icon{
-  width:48px;height:48px;border-radius:12px;
+  width:42px;height:42px;border-radius:9px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;margin-bottom:14px;
-  background:rgba(0,229,160,0.1);
-  border:1px solid rgba(0,229,160,0.2);
+  font-size:1.2rem;margin-bottom:10px;
+  background:rgba(37,99,235,0.07);
+  border:1px solid rgba(37,99,235,0.14);
 }
-.pipe-step.orange .step-icon{background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.2)}
-.pipe-step.blue .step-icon{background:rgba(79,195,247,0.1);border-color:rgba(79,195,247,0.2)}
-.pipe-step.purple .step-icon{background:rgba(180,130,255,0.1);border-color:rgba(180,130,255,0.2)}
-.pipe-step h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:6px}
-.pipe-step p{font-size:.78rem;color:var(--muted);line-height:1.55}
+.pipe-step.orange .step-icon{background:rgba(180,83,9,0.07);border-color:rgba(180,83,9,0.14)}
+.pipe-step.blue .step-icon{background:rgba(3,105,161,0.07);border-color:rgba(3,105,161,0.14)}
+.pipe-step.purple .step-icon{background:rgba(109,40,217,0.07);border-color:rgba(109,40,217,0.14)}
+.pipe-step h4{font-weight:700;font-size:.86rem;margin-bottom:4px;color:var(--text)}
+.pipe-step p{font-size:.74rem;color:var(--muted);line-height:1.5}
 .pipe-step .step-num{
   position:absolute;top:-10px;left:-10px;
   width:22px;height:22px;border-radius:50%;
-  background:var(--accent);color:#080c12;
-  font-family:'Syne',sans-serif;font-size:.7rem;font-weight:800;
+  background:var(--accent);color:#ffffff;
+  font-size:.68rem;font-weight:800;
   display:flex;align-items:center;justify-content:center;
 }
 .pipe-arrow{
-  width:40px;height:2px;
-  background:linear-gradient(90deg,var(--accent),rgba(0,229,160,0.3));
-  position:relative;flex-shrink:0;
-  margin:0 -2px;
+  width:34px;height:2px;
+  background:linear-gradient(90deg,var(--accent),rgba(37,99,235,0.25));
+  position:relative;flex-shrink:0;margin:0 -2px;
 }
 .pipe-arrow::after{
   content:'';position:absolute;right:-6px;top:-4px;
   width:0;height:0;
   border-top:5px solid transparent;
   border-bottom:5px solid transparent;
-  border-left:8px solid rgba(0,229,160,0.6);
+  border-left:8px solid rgba(37,99,235,0.5);
 }
 .pipeline-code{
-  background:rgba(6,10,18,0.9);
+  background:#f1f5f9;
   border:1px solid var(--border);
-  border-radius:14px;padding:32px;
+  border-radius:12px;padding:28px;
   font-family:'Courier New',monospace;
   font-size:.82rem;
   line-height:1.9;
-  color:#8fa8c8;
+  color:#475569;
   overflow-x:auto;
   position:relative;
 }
 .pipeline-code::before{
   content:'generator.py → cleaners.py → build_features.py';
-  position:absolute;top:14px;right:20px;
-  font-size:.7rem;color:var(--muted);font-family:'DM Sans',sans-serif;
+  position:absolute;top:12px;right:16px;
+  font-size:.66rem;color:var(--muted);
+  font-family:system-ui,sans-serif;
 }
-.code-green{color:#00e5a0}
-.code-blue{color:#4fc3f7}
-.code-orange{color:#ff6b35}
-.code-purple{color:#b482ff}
-.code-grey{color:#556677}
+.code-green{color:#2563eb}
+.code-blue{color:#0369a1}
+.code-orange{color:#b45309}
+.code-purple{color:#7c3aed}
+.code-grey{color:#94a3b8}
 
 /* EDA */
-#eda{background:var(--bg)}
 .charts-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
 }
 .chart-card{
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:16px;padding:28px;
-  backdrop-filter:blur(20px);
+  border-radius:12px;padding:22px;
+  box-shadow:var(--shadow);
 }
 .chart-card.wide{grid-column:span 2}
-.chart-card h3{
-  font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;
-  margin-bottom:6px;
-}
+.chart-card h3{font-weight:700;font-size:.92rem;margin-bottom:4px;color:var(--text)}
 .chart-card .chart-desc{
-  font-size:.82rem;color:var(--muted);margin-bottom:22px;line-height:1.5;
+  font-size:.8rem;color:var(--muted);margin-bottom:18px;line-height:1.55;
 }
 .chart-wrapper{position:relative;height:260px}
 .chart-wrapper.tall{height:320px}
 .observation{
-  display:flex;align-items:flex-start;gap:12px;
-  margin-top:18px;padding-top:18px;
+  display:flex;align-items:flex-start;gap:10px;
+  margin-top:14px;padding-top:14px;
   border-top:1px solid var(--border);
 }
 .obs-dot{
-  width:8px;height:8px;border-radius:50%;
+  width:7px;height:7px;border-radius:50%;
   background:var(--accent);margin-top:6px;flex-shrink:0;
 }
-.obs-dot.orange{background:var(--accent2)}
-.obs-dot.blue{background:var(--accent3)}
-.observation p{font-size:.82rem;color:var(--muted);line-height:1.6}
-.observation p strong{color:var(--text);font-weight:500}
+.obs-dot.orange{background:var(--warn)}
+.obs-dot.blue{background:var(--info)}
+.observation p{font-size:.8rem;color:var(--muted);line-height:1.6}
+.observation p strong{color:var(--text);font-weight:600}
 
 /* INSIGHTS */
-#insights{background:rgba(10,16,26,0.9)}
 .insights-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
 }
 .insight-card{
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  backdrop-filter:blur(20px);
-  transition:border-color .25s,transform .25s;
+  border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:box-shadow .2s,transform .2s;
 }
-.insight-card:hover{border-color:rgba(0,229,160,0.3);transform:translateY(-4px)}
+.insight-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
 .insight-header{
-  padding:24px 28px 20px;
+  padding:18px 22px 14px;
   border-bottom:1px solid var(--border);
   display:flex;justify-content:space-between;align-items:flex-start;
 }
 .insight-number{
-  font-family:'Syne',sans-serif;
-  font-size:.75rem;font-weight:800;
-  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  font-size:.7rem;font-weight:700;
+  color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
 }
 .insight-tag{
-  font-size:.7rem;padding:3px 10px;border-radius:100px;
-  background:rgba(0,229,160,0.1);
-  border:1px solid rgba(0,229,160,0.2);
-  color:var(--accent);font-weight:600;letter-spacing:.04em;
+  font-size:.66rem;padding:2px 8px;border-radius:100px;
+  background:rgba(37,99,235,0.07);
+  border:1px solid rgba(37,99,235,0.14);
+  color:var(--accent);font-weight:600;
 }
 .insight-tag.red{
-  background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.2);color:var(--accent2);
+  background:rgba(180,83,9,0.07);border-color:rgba(180,83,9,0.14);color:var(--warn);
 }
 .insight-tag.blue{
-  background:rgba(79,195,247,0.1);border-color:rgba(79,195,247,0.2);color:var(--accent3);
+  background:rgba(3,105,161,0.07);border-color:rgba(3,105,161,0.14);color:var(--info);
 }
-.insight-body{padding:0 28px 20px}
+.insight-body{padding:0 22px 14px}
 .insight-body h3{
-  font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;
-  margin-bottom:10px;margin-top:20px;line-height:1.3;
+  font-weight:700;font-size:1rem;
+  margin-bottom:7px;margin-top:14px;line-height:1.35;color:var(--text);
 }
-.insight-body p{font-size:.88rem;color:rgba(232,237,245,.65);line-height:1.7}
-.insight-chart{padding:0 28px;height:200px;position:relative}
+.insight-body p{font-size:.86rem;color:var(--muted);line-height:1.7}
+.insight-chart{padding:0 22px;height:200px;position:relative}
 .insight-implication{
-  margin:20px 28px 28px;
-  padding:14px 18px;
-  background:rgba(0,229,160,0.06);
-  border:1px solid rgba(0,229,160,0.15);
-  border-radius:10px;
+  margin:14px 22px 22px;
+  padding:12px 15px;
+  background:rgba(37,99,235,0.04);
+  border:1px solid rgba(37,99,235,0.12);
+  border-radius:8px;
 }
 .insight-implication .impl-label{
-  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--accent);font-weight:700;margin-bottom:4px;
 }
-.insight-implication p{font-size:.82rem;color:rgba(232,237,245,.6);line-height:1.55}
+.insight-implication p{font-size:.8rem;color:var(--muted);line-height:1.55}
 
 /* SKILLS */
-#skills{background:var(--bg)}
 .skills-narrative{
-  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
 }
 .skill-story{
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:16px;padding:32px;
-  backdrop-filter:blur(20px);
-  position:relative;overflow:hidden;
-  transition:border-color .25s;
+  border-radius:12px;padding:26px;
+  box-shadow:var(--shadow);
+  transition:box-shadow .2s;
 }
-.skill-story:hover{border-color:rgba(0,229,160,0.25)}
-.skill-story::after{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent);
-  opacity:0;
-  transition:opacity .3s;
-}
-.skill-story:hover::after{opacity:1}
-.skill-icon{font-size:2rem;margin-bottom:18px}
-.skill-story h3{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;
-  margin-bottom:10px;letter-spacing:-.01em;
-}
+.skill-story:hover{box-shadow:var(--shadow-md)}
+.skill-icon{font-size:1.6rem;margin-bottom:12px;display:block}
+.skill-story h3{font-weight:700;font-size:1rem;margin-bottom:7px;color:var(--text)}
 .skill-story .skill-badge{
   display:inline-block;
-  background:rgba(0,229,160,0.08);
-  border:1px solid rgba(0,229,160,0.15);
-  color:var(--accent);font-size:.7rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;
-  padding:3px 10px;border-radius:100px;margin-bottom:14px;
+  background:rgba(37,99,235,0.07);
+  border:1px solid rgba(37,99,235,0.14);
+  color:var(--accent);font-size:.66rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:2px 8px;border-radius:100px;margin-bottom:10px;
 }
-.skill-story p{font-size:.88rem;color:rgba(232,237,245,.6);line-height:1.75}
+.skill-story p{font-size:.86rem;color:var(--muted);line-height:1.75}
 .skill-story p code{
-  background:rgba(0,229,160,0.1);
-  color:var(--accent);padding:1px 6px;border-radius:4px;
-  font-size:.8rem;
+  background:rgba(37,99,235,0.07);
+  color:var(--accent);padding:1px 5px;border-radius:4px;
+  font-size:.78rem;
 }
-.skill-bars{margin-top:20px;display:flex;flex-direction:column;gap:10px}
-.skill-bar{display:flex;flex-direction:column;gap:5px}
+.skill-bars{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.skill-bar{display:flex;flex-direction:column;gap:4px}
 .skill-bar-label{
   display:flex;justify-content:space-between;
-  font-size:.75rem;color:var(--muted);
+  font-size:.72rem;color:var(--muted);
 }
 .skill-bar-track{
-  height:4px;background:rgba(255,255,255,0.08);
+  height:4px;background:rgba(0,0,0,0.08);
   border-radius:2px;overflow:hidden;
 }
 .skill-bar-fill{
@@ -476,117 +414,107 @@ section{padding:100px 5%}
 @keyframes fillBar{from{width:0}}
 
 /* ARCHITECTURE */
-#architecture{background:rgba(10,16,26,0.9)}
 .arch-grid{
-  display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:start;
+  display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:start;
 }
 .arch-diagram{
-  background:rgba(6,10,18,0.9);
+  background:#f1f5f9;
   border:1px solid var(--border);
-  border-radius:16px;padding:40px;
+  border-radius:12px;padding:28px;
   font-family:'Courier New',monospace;
-  font-size:.82rem;
-  line-height:2;
-  color:#8fa8c8;
+  font-size:.8rem;line-height:2;color:#475569;
 }
 .arch-layer{
   border-left:2px solid var(--border);
-  padding-left:20px;margin-bottom:28px;
+  padding-left:16px;margin-bottom:22px;
 }
 .arch-layer.active{border-left-color:var(--accent)}
 .arch-layer-title{
-  font-family:'Syne',sans-serif;font-size:.7rem;font-weight:800;
-  color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:14px;
+  font-family:system-ui,sans-serif;
+  font-size:.66rem;font-weight:700;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:10px;
 }
-.tech-chips{display:flex;flex-wrap:wrap;gap:8px}
+.tech-chips{display:flex;flex-wrap:wrap;gap:7px}
 .chip{
-  background:rgba(255,255,255,0.04);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:8px;
-  padding:8px 14px;
-  font-size:.78rem;color:var(--text);
+  border-radius:6px;
+  padding:5px 11px;
+  font-size:.74rem;color:var(--text);
   font-weight:500;
-  transition:border-color .2s,background .2s;
-  display:flex;align-items:center;gap:6px;
+  transition:border-color .15s,color .15s;
+  display:flex;align-items:center;gap:5px;
+  font-family:system-ui,sans-serif;
 }
-.chip:hover{border-color:rgba(0,229,160,0.3);background:rgba(0,229,160,0.05)}
-.chip .chip-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.chip .chip-dot.orange{background:var(--accent2)}
-.chip .chip-dot.blue{background:var(--accent3)}
-.arch-stack{display:flex;flex-direction:column;gap:20px}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip .chip-dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.chip .chip-dot.orange{background:var(--warn)}
+.chip .chip-dot.blue{background:var(--info)}
+.arch-stack{display:flex;flex-direction:column;gap:14px}
 .stack-item{
-  background:var(--card-bg);
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:12px;padding:20px;
-  backdrop-filter:blur(20px);
+  border-radius:10px;padding:16px;
+  box-shadow:var(--shadow);
 }
 .stack-item h4{
-  font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;
-  color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;
+  font-size:.74rem;font-weight:700;
+  color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px;
 }
 
 /* FOOTER */
 footer{
-  padding:60px 5%;
+  padding:44px 5%;
   border-top:1px solid var(--border);
+  background:var(--surface);
   display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:24px;
+  flex-wrap:wrap;gap:18px;
 }
-.footer-name{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;
-  letter-spacing:-.02em;
-}
+.footer-name{font-weight:700;font-size:1rem;color:var(--text)}
 .footer-name span{color:var(--accent)}
-.footer-links{display:flex;gap:24px}
+.footer-links{display:flex;gap:18px}
 .footer-links a{
-  color:var(--muted);text-decoration:none;font-size:.85rem;
-  transition:color .2s;
+  color:var(--muted);text-decoration:none;font-size:.84rem;
+  transition:color .15s;
 }
 .footer-links a:hover{color:var(--accent)}
-.footer-copy{color:var(--muted);font-size:.8rem}
+.footer-copy{color:var(--muted);font-size:.76rem}
 
 /* ANIMATIONS */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes fadeLeft{
-  from{opacity:0;transform:translateX(30px)}
-  to{opacity:1;transform:translateX(0)}
-}
 .reveal{
-  opacity:0;transform:translateY(24px);
-  transition:opacity .7s ease,transform .7s ease;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease;
 }
 .reveal.visible{opacity:1;transform:none}
-
-/* SCROLLING NUMBER ANIMATION */
 .count-up{font-variant-numeric:tabular-nums}
-
-/* DIVIDER */
-.divider{
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--border),transparent);
-  margin:0 5%;
-}
+.divider{height:1px;background:var(--border);margin:0 5%}
 
 /* MOBILE */
 @media(max-width:900px){
-  .hero-stats{display:none}
   .problem-grid,.charts-grid,.insights-grid,.skills-narrative,.arch-grid{
     grid-template-columns:1fr;
   }
   .chart-card.wide{grid-column:span 1}
-  .pipeline-flow{flex-direction:column}
-  .pipe-arrow{width:2px;height:30px;background:linear-gradient(180deg,var(--accent),rgba(0,229,160,0.3))}
+  .pipeline-flow{flex-direction:column;align-items:center}
+  .pipe-arrow{
+    width:2px;height:26px;margin:0;
+    background:linear-gradient(180deg,var(--accent),rgba(37,99,235,0.25));
+  }
   .pipe-arrow::after{
     bottom:-6px;right:auto;top:auto;left:-4px;
-    border-left:none;border-right:none;
     border-left:5px solid transparent;border-right:5px solid transparent;
-    border-top:8px solid rgba(0,229,160,0.6);
+    border-top:8px solid rgba(37,99,235,0.5);
+    border-bottom:none;
   }
+  .hero-stats{gap:12px}
+  section{padding:60px 5%}
+}
+@media(max-width:640px){
   nav .nav-links{display:none}
+  #hero{padding:90px 5% 60px}
+  .hero-stats .stat-card{min-width:110px}
+  footer{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -594,7 +522,7 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">K · IQ</div>
+  <div class="nav-logo">JHB Infrastructure Intelligence</div>
   <ul class="nav-links">
     <li><a href="#problem">Case Study</a></li>
     <li><a href="#pipeline">Pipeline</a></li>
@@ -607,42 +535,40 @@ footer{
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-tag">Data Science · Urban Analytics · Johannesburg</div>
-    <h1 class="hero-name">Kabelo<span>.</span></h1>
-    <div class="hero-title">Data Scientist &nbsp;/&nbsp; Data Analyst</div>
+    <div class="hero-tag">Infrastructure Analytics · Johannesburg</div>
+    <h1 class="hero-name">JHB Municipal<br><span>Infrastructure Intelligence</span></h1>
+    <div class="hero-title">Municipal Infrastructure Analytics | Johannesburg</div>
     <p class="hero-statement">
-      I turn messy municipal data into <strong>decisions that fix real problems</strong> — from potholes in Soweto to burst pipes in Alexandra. This is what that looks like.
+      Translating municipal incident data into operational decisions — tracking pothole and water leak patterns across Johannesburg wards to surface <strong>SLA breaches, repeat-incident hotspots, and contractor accountability gaps</strong>.
     </p>
     <div class="hero-ctas">
       <a href="#problem" class="btn-primary">
         Explore the Project
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="https://github.com/kabelo-analytics/jhb-infrastructure-intelligence" target="_blank" class="btn-secondary">
         View on GitHub
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-card">
-      <div class="stat-num count-up" data-target="200000">0</div>
-      <div class="stat-label">Incident Records</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num count-up" data-target="114">0</div>
-      <div class="stat-label">Wards Analysed</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color:var(--accent2)">34.7%</div>
-      <div class="stat-label">SLA Breach Rate</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color:var(--accent3)">2</div>
-      <div class="stat-label">Issue Typologies</div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-num count-up" data-target="200000">0</span>
+        <div class="stat-label">Incident Records</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num count-up" data-target="114">0</span>
+        <div class="stat-label">Wards Analysed</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" style="color:var(--warn)">34.7%</span>
+        <div class="stat-label">SLA Breach Rate</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" style="color:var(--info)">2</span>
+        <div class="stat-label">Issue Typologies</div>
+      </div>
     </div>
   </div>
 </section>
@@ -665,7 +591,7 @@ footer{
         The result: <strong>resources get allocated reactively</strong>. The same street gets a complaint every three months. The same pipe zone floods twice a year. Contractors are dispatched blind. SLA breach rates creep up silently.
       </p>
       <p>
-        This project builds the analytics layer that should sit between raw complaint data and operations. It asks: <strong>where are the real hotspots, who's breaching SLAs, and what patterns are hiding in the backlog?</strong>
+        This project builds the analytics layer that should sit between raw complaint data and operations. The core questions: <strong>where are the real hotspots, who's breaching SLAs, and what patterns are hiding in the backlog?</strong>
       </p>
       <p>
         The dataset is synthetic but shaped to mirror real Johannesburg operational patterns — ward boundaries, contractor names, seasonal timing, and the kinds of messy, incomplete records that real municipal data produces.
@@ -673,22 +599,22 @@ footer{
     </div>
     <div class="problem-metrics">
       <div class="metric-bar">
-        <div class="stat-num">4.2 days</div>
+        <h4>4.2 days</h4>
         <span>Median time-to-repair (potholes)</span>
         <p>SLA target: 3 days. Most incidents breach this window without anyone noticing.</p>
       </div>
       <div class="metric-bar warn">
-        <div class="stat-num">34.7%</div>
+        <h4>34.7%</h4>
         <span>SLA breach rate — water leaks</span>
         <p>Over one in three water incidents exceed the 48-hour response window.</p>
       </div>
       <div class="metric-bar info">
-        <div class="stat-num">22%</div>
+        <h4>22%</h4>
         <span>Repeat incident rate</span>
         <p>Almost a quarter of incidents recur on the same street segment within 90 days.</p>
       </div>
       <div class="metric-bar">
-        <div class="stat-num">8 wards</div>
+        <h4>8 wards</h4>
         <span>Account for 41% of all complaints</span>
         <p>Soweto, Alexandra, and Diepsloot dominate — but aren't getting proportional resources.</p>
       </div>
@@ -755,21 +681,21 @@ footer{
     <div class="pipe-arrow"></div>
     <div class="pipe-step orange">
       <div class="step-num">2</div>
-      <div class="step-icon" style="background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.2)">🧹</div>
+      <div class="step-icon" style="background:rgba(180,83,9,0.07);border-color:rgba(180,83,9,0.14)">🧹</div>
       <h4>Cleaning</h4>
       <p>Null imputation, duplicate removal, date parsing, and field standardisation</p>
     </div>
     <div class="pipe-arrow"></div>
     <div class="pipe-step blue">
       <div class="step-num">3</div>
-      <div class="step-icon" style="background:rgba(79,195,247,0.1);border-color:rgba(79,195,247,0.2)">🔄</div>
+      <div class="step-icon" style="background:rgba(3,105,161,0.07);border-color:rgba(3,105,161,0.14)">🔄</div>
       <h4>Transformation</h4>
       <p>Normalisation, schema alignment, relational key mapping across tables</p>
     </div>
     <div class="pipe-arrow"></div>
     <div class="pipe-step purple">
       <div class="step-num">4</div>
-      <div class="step-icon" style="background:rgba(180,130,255,0.1);border-color:rgba(180,130,255,0.2)">⚙️</div>
+      <div class="step-icon" style="background:rgba(109,40,217,0.07);border-color:rgba(109,40,217,0.14)">⚙️</div>
       <h4>Feature Engineering</h4>
       <p>Time-to-repair, SLA flags, repeat-incident scores, hotspot density metrics</p>
     </div>
@@ -881,12 +807,11 @@ footer{
   <div class="reveal">
     <div class="section-label">04 · Urban Intelligence Insights</div>
     <h2 class="section-title">What the Patterns Are Telling Us</h2>
-    <p class="section-sub">Analysis complete. Now for the part that matters: what does this mean for the city, and what should it do about it?</p>
+    <p class="section-sub">Analysis complete. What does this mean for the city, and what should decision-makers do about it?</p>
   </div>
 
   <div class="insights-grid reveal">
 
-    <!-- Insight 1 -->
     <div class="insight-card">
       <div class="insight-header">
         <span class="insight-number">Insight 01</span>
@@ -898,12 +823,11 @@ footer{
       </div>
       <div class="insight-chart"><canvas id="insightChart1"></canvas></div>
       <div class="insight-implication">
-        <div class="impl-label">Real-World Implication</div>
+        <div class="impl-label">Operational Implication</div>
         <p>Reactive repair is costing more than proactive replacement would. A targeted refurbishment programme in the top repeat-incident zones would reduce total incidents by an estimated 18% within 12 months.</p>
       </div>
     </div>
 
-    <!-- Insight 2 -->
     <div class="insight-card">
       <div class="insight-header">
         <span class="insight-number">Insight 02</span>
@@ -915,12 +839,11 @@ footer{
       </div>
       <div class="insight-chart"><canvas id="insightChart2"></canvas></div>
       <div class="insight-implication">
-        <div class="impl-label">Real-World Implication</div>
+        <div class="impl-label">Operational Implication</div>
         <p>Performance-based contracting with breach penalties would create immediate accountability. This is a procurement decision, not a data problem — but it needed the data to become visible.</p>
       </div>
     </div>
 
-    <!-- Insight 3 -->
     <div class="insight-card">
       <div class="insight-header">
         <span class="insight-number">Insight 03</span>
@@ -932,12 +855,11 @@ footer{
       </div>
       <div class="insight-chart"><canvas id="insightChart3"></canvas></div>
       <div class="insight-implication">
-        <div class="impl-label">Real-World Implication</div>
+        <div class="impl-label">Operational Implication</div>
         <p>Pre-emptive crew surge planning in November could absorb the January spike without SLA breaches. This is a scheduling problem solvable with a 3-month forecast model.</p>
       </div>
     </div>
 
-    <!-- Insight 4 -->
     <div class="insight-card">
       <div class="insight-header">
         <span class="insight-number">Insight 04</span>
@@ -949,7 +871,7 @@ footer{
       </div>
       <div class="insight-chart"><canvas id="insightChart4"></canvas></div>
       <div class="insight-implication">
-        <div class="impl-label">Real-World Implication</div>
+        <div class="impl-label">Operational Implication</div>
         <p>A dedicated rapid-response unit for these three suburbs — even a small one — would produce outsized impact on citywide SLA compliance rates and resident satisfaction scores.</p>
       </div>
     </div>
@@ -970,7 +892,7 @@ footer{
   <div class="skills-narrative reveal">
 
     <div class="skill-story">
-      <div class="skill-icon">🐍</div>
+      <span class="skill-icon">🐍</span>
       <div class="skill-badge">Python</div>
       <h3>End-to-End Pipeline in Python</h3>
       <p>Every stage — generation, cleaning, feature engineering, analysis — runs in Python. The pipeline is modular: <code>generator.py</code>, <code>cleaners.py</code>, and <code>build_features.py</code> are independently testable. Reproducibility was a design constraint from the start.</p>
@@ -991,7 +913,7 @@ footer{
     </div>
 
     <div class="skill-story">
-      <div class="skill-icon">🗃️</div>
+      <span class="skill-icon">🗃️</span>
       <div class="skill-badge">SQL · Data Modelling</div>
       <h3>Relational Schema First, Analysis Second</h3>
       <p>The schema was designed before a single row was generated. Separate tables for incidents, contractors, wards, and status lifecycle — joined cleanly via foreign keys. This makes the data model directly portable to a SQL warehouse or Power BI semantic layer.</p>
@@ -1008,7 +930,7 @@ footer{
     </div>
 
     <div class="skill-story">
-      <div class="skill-icon">🧼</div>
+      <span class="skill-icon">🧼</span>
       <div class="skill-badge">Data Cleaning</div>
       <h3>Cleaning Like Real Data Demands</h3>
       <p>The synthetic dataset was deliberately made messy: 4% null rates, 2% duplicates, inconsistent suburb names (<code>'Alex'</code> vs <code>'Alexandra'</code>), and malformed dates. The cleaning pipeline handles each class of error with a documented, reproducible strategy — not ad-hoc patches.</p>
@@ -1025,10 +947,10 @@ footer{
     </div>
 
     <div class="skill-story">
-      <div class="skill-icon">📐</div>
+      <span class="skill-icon">📐</span>
       <div class="skill-badge">Problem Framing</div>
       <h3>Starting with the Right Question</h3>
-      <p>The project didn't start with a dataset — it started with a business problem. What does the City of Johannesburg need to make better resource allocation decisions? The KPIs, schema design, and feature engineering all flow from that framing. Analytical thinking before analytical tools.</p>
+      <p>The project starts with a business problem, not a dataset. What does the City of Johannesburg need to make better resource allocation decisions? The KPIs, schema design, and feature engineering all flow from that framing. Analytical thinking before analytical tools.</p>
       <div class="skill-bars">
         <div class="skill-bar">
           <div class="skill-bar-label"><span>KPI design to business need</span></div>
@@ -1066,7 +988,7 @@ footer{
           </div>
         </div>
         <div class="arch-layer active">
-          <div class="arch-layer-title">Layer 2 · Cleaning & Validation</div>
+          <div class="arch-layer-title">Layer 2 · Cleaning &amp; Validation</div>
           <div class="tech-chips">
             <div class="chip"><div class="chip-dot orange"></div>Pandas</div>
             <div class="chip"><div class="chip-dot orange"></div>cleaners.py</div>
@@ -1083,7 +1005,7 @@ footer{
           </div>
         </div>
         <div class="arch-layer active">
-          <div class="arch-layer-title">Layer 4 · Analysis & Reporting</div>
+          <div class="arch-layer-title">Layer 4 · Analysis &amp; Reporting</div>
           <div class="tech-chips">
             <div class="chip"><div class="chip-dot"></div>Jupyter Notebooks</div>
             <div class="chip"><div class="chip-dot"></div>Matplotlib</div>
@@ -1091,16 +1013,16 @@ footer{
             <div class="chip"><div class="chip-dot"></div>report.md</div>
           </div>
         </div>
-        <div class="arch-layer" style="border-left-color:var(--accent2)">
-          <div class="arch-layer-title" style="color:var(--accent2)">Phase 2 · BI Dashboard (Planned)</div>
+        <div class="arch-layer" style="border-left-color:var(--warn)">
+          <div class="arch-layer-title" style="color:var(--warn)">Phase 2 · BI Dashboard (Planned)</div>
           <div class="tech-chips">
             <div class="chip"><div class="chip-dot orange"></div>Power BI</div>
             <div class="chip"><div class="chip-dot orange"></div>DAX Measures</div>
             <div class="chip"><div class="chip-dot orange"></div>Semantic Layer</div>
           </div>
         </div>
-        <div class="arch-layer" style="border-left-color:var(--accent3)">
-          <div class="arch-layer-title" style="color:var(--accent3)">Phase 3 · ML Layer (Optional)</div>
+        <div class="arch-layer" style="border-left-color:var(--info)">
+          <div class="arch-layer-title" style="color:var(--info)">Phase 3 · ML Layer (Optional)</div>
           <div class="tech-chips">
             <div class="chip"><div class="chip-dot blue"></div>scikit-learn</div>
             <div class="chip"><div class="chip-dot blue"></div>Image Classification</div>
@@ -1159,21 +1081,22 @@ footer{
 <!-- FOOTER -->
 <footer>
   <div>
-    <div class="footer-name">Kabelo<span>.</span></div>
-    <div style="color:var(--muted);font-size:.82rem;margin-top:4px">Data Scientist · Data Analyst · Johannesburg</div>
+    <div class="footer-name">JHB <span>Infrastructure Intelligence</span></div>
+    <div style="color:var(--muted);font-size:.78rem;margin-top:3px">Municipal Infrastructure Analytics · Johannesburg</div>
   </div>
   <div class="footer-links">
     <a href="https://github.com/kabelo-analytics/jhb-infrastructure-intelligence" target="_blank">GitHub Repo</a>
+    <a href="https://km-webdvlpr.github.io/III.IV/projects/jhb-infrastructure-intelligence/" target="_blank">Portfolio Page</a>
     <a href="#hero">Back to Top ↑</a>
   </div>
-  <div class="footer-copy">JHB Infrastructure Intelligence · 2025</div>
+  <div class="footer-copy">JHB Infrastructure Intelligence · 2026</div>
 </footer>
 
 <script>
 // ── SCROLL REVEAL ──────────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── COUNT UP ───────────────────────────────────────────────
@@ -1183,7 +1106,7 @@ const countObserver = new IntersectionObserver((entries) => {
     if(!e.isIntersecting) return;
     const el = e.target;
     const target = parseInt(el.dataset.target);
-    const duration = 2000;
+    const duration = 1800;
     const step = target / (duration / 16);
     let current = 0;
     const timer = setInterval(() => {
@@ -1197,15 +1120,15 @@ const countObserver = new IntersectionObserver((entries) => {
 countEls.forEach(el => countObserver.observe(el));
 
 // ── CHART DEFAULTS ─────────────────────────────────────────
-Chart.defaults.color = '#7a8799';
-Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#64748b';
+Chart.defaults.font.family = "system-ui, -apple-system, sans-serif";
 Chart.defaults.font.size = 11;
 
-const gridColor = 'rgba(255,255,255,0.06)';
-const ACCENT = '#00e5a0';
-const ORANGE = '#ff6b35';
-const BLUE = '#4fc3f7';
-const PURPLE = '#b482ff';
+const gridColor = 'rgba(0,0,0,0.07)';
+const ACCENT = '#2563eb';
+const WARN   = '#b45309';
+const INFO   = '#0369a1';
+const PURPLE = '#7c3aed';
 
 // ── ISSUE TYPE DOUGHNUT ────────────────────────────────────
 new Chart(document.getElementById('issueTypeChart'), {
@@ -1214,8 +1137,8 @@ new Chart(document.getElementById('issueTypeChart'), {
     labels: ['Potholes', 'Water Leaks'],
     datasets: [{
       data: [58, 42],
-      backgroundColor: [ACCENT, ORANGE],
-      borderColor: 'rgba(8,12,18,0.5)',
+      backgroundColor: [ACCENT, WARN],
+      borderColor: '#ffffff',
       borderWidth: 3,
       hoverOffset: 6,
     }]
@@ -1239,13 +1162,13 @@ new Chart(document.getElementById('trendChart'), {
       {
         label: 'Potholes',
         data: [2800, 2650, 2100, 1600, 1400, 1350, 1200, 1300, 1450, 1600, 1800, 2200],
-        borderColor: ACCENT, backgroundColor: 'rgba(0,229,160,0.08)',
+        borderColor: ACCENT, backgroundColor: 'rgba(37,99,235,0.07)',
         borderWidth: 2, pointRadius: 3, fill: true, tension: 0.4,
       },
       {
         label: 'Water Leaks',
         data: [2100, 2050, 1700, 1300, 1100, 1050, 1000, 1050, 1100, 1200, 1350, 1700],
-        borderColor: ORANGE, backgroundColor: 'rgba(255,107,53,0.06)',
+        borderColor: WARN, backgroundColor: 'rgba(180,83,9,0.05)',
         borderWidth: 2, pointRadius: 3, fill: true, tension: 0.4,
       }
     ]
@@ -1253,8 +1176,8 @@ new Chart(document.getElementById('trendChart'), {
   options: {
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { color: gridColor }, ticks: { color: '#556677' } },
-      y: { grid: { color: gridColor }, ticks: { color: '#556677' } }
+      x: { grid: { color: gridColor } },
+      y: { grid: { color: gridColor } }
     },
     plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true } } }
   }
@@ -1268,15 +1191,15 @@ new Chart(document.getElementById('repairDistChart'), {
     datasets: [{
       label: 'Incidents',
       data: [8200, 14500, 18900, 52000, 38000, 28000, 19400],
-      backgroundColor: [ACCENT,'rgba(0,229,160,0.7)','rgba(0,229,160,0.5)','rgba(0,229,160,0.35)',BLUE,'rgba(79,195,247,0.5)',ORANGE],
-      borderRadius: 6, borderSkipped: false,
+      backgroundColor: [ACCENT,'rgba(37,99,235,0.7)','rgba(37,99,235,0.5)','rgba(37,99,235,0.35)',INFO,'rgba(3,105,161,0.5)',WARN],
+      borderRadius: 5, borderSkipped: false,
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { color: gridColor }, ticks: { color: '#556677' } },
-      y: { grid: { color: gridColor }, ticks: { color: '#556677' } }
+      x: { grid: { color: gridColor } },
+      y: { grid: { color: gridColor } }
     },
     plugins: { legend: { display: false } }
   }
@@ -1285,7 +1208,7 @@ new Chart(document.getElementById('repairDistChart'), {
 // ── CONTRACTOR BAR ─────────────────────────────────────────
 const contractorLabels = ['Contractor A','Contractor B','Contractor E','Contractor F','Contractor H','Contractor I','Contractor J','Contractor G','Contractor K','Contractor L','Contractor C','Contractor D'];
 const contractorData = [91, 87, 84, 81, 78, 74, 71, 67, 63, 58, 51, 48];
-const contractorColors = contractorData.map(v => v >= 70 ? ACCENT : v >= 60 ? BLUE : ORANGE);
+const contractorColors = contractorData.map(v => v >= 70 ? ACCENT : v >= 60 ? INFO : WARN);
 
 new Chart(document.getElementById('contractorChart'), {
   type: 'bar',
@@ -1302,68 +1225,66 @@ new Chart(document.getElementById('contractorChart'), {
     indexAxis: 'y',
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { color: gridColor }, ticks: { color: '#556677' }, min: 0, max: 100 },
-      y: { grid: { display: false }, ticks: { color: '#556677' } }
+      x: { grid: { color: gridColor }, min: 0, max: 100 },
+      y: { grid: { display: false } }
     },
     plugins: { legend: { display: false } }
   }
 });
 
 // ── WARD CHART ─────────────────────────────────────────────
-const wards = ['Ward 14\nSoweto','Ward 82\nAlexandra','Ward 95\nDiepsloot','Ward 23\nOrlando','Ward 51\nMidrand','Ward 68\nKathlehong','Ward 77\nThembisa','Ward 31\nOrlando E','Ward 44\nMeadowlands','Ward 12\nPimville','Ward 63\nSprings','Ward 88\nTembisa N','Ward 17\nJabavu','Ward 39\nSoweto S','Ward 55\nKliptown'];
+const wards = ['Ward 14','Ward 82','Ward 95','Ward 23','Ward 51','Ward 68','Ward 77','Ward 31','Ward 44','Ward 12','Ward 63','Ward 88','Ward 17','Ward 39','Ward 55'];
 const wardData = [4820, 4150, 3940, 3310, 2980, 2750, 2640, 2510, 2340, 2180, 2050, 1980, 1890, 1760, 1640];
 
 new Chart(document.getElementById('wardChart'), {
   type: 'bar',
   data: {
-    labels: wards.map(w => w.split('\n')[0]),
+    labels: wards,
     datasets: [{
       label: 'Incidents',
       data: wardData,
-      backgroundColor: wardData.map((v, i) => i < 3 ? ORANGE : i < 8 ? ACCENT : 'rgba(0,229,160,0.35)'),
-      borderRadius: 5, borderSkipped: false,
+      backgroundColor: wardData.map((v, i) => i < 3 ? WARN : i < 8 ? ACCENT : 'rgba(37,99,235,0.3)'),
+      borderRadius: 4, borderSkipped: false,
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { display: false }, ticks: { color: '#556677', font: { size: 10 } } },
-      y: { grid: { color: gridColor }, ticks: { color: '#556677' } }
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: gridColor } }
     },
     plugins: { legend: { display: false } }
   }
 });
 
 // ── INSIGHT CHARTS ─────────────────────────────────────────
-// Insight 1 – Repeat vs Non-Repeat
 new Chart(document.getElementById('insightChart1'), {
   type: 'bar',
   data: {
     labels: ['Ward 14', 'Ward 82', 'Ward 95', 'Ward 23', 'Ward 51', 'Others'],
     datasets: [
-      { label: 'First-time', data: [2100, 1800, 1700, 1500, 1200, 12000], backgroundColor: 'rgba(0,229,160,0.4)', borderRadius: 4 },
-      { label: 'Repeat (<90d)', data: [2720, 2350, 2240, 1810, 1780, 3200], backgroundColor: ORANGE, borderRadius: 4 },
+      { label: 'First-time', data: [2100, 1800, 1700, 1500, 1200, 12000], backgroundColor: 'rgba(37,99,235,0.35)', borderRadius: 4 },
+      { label: 'Repeat (<90d)', data: [2720, 2350, 2240, 1810, 1780, 3200], backgroundColor: WARN, borderRadius: 4 },
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { display: false }, ticks: { color: '#556677', font:{size:9} } },
-      y: { grid: { color: gridColor }, ticks: { color: '#556677' }, stacked: false }
+      x: { grid: { display: false }, ticks: { font:{size:9} } },
+      y: { grid: { color: gridColor } }
     },
     plugins: { legend: { position:'bottom', labels:{padding:12,usePointStyle:true,font:{size:10}} } }
   }
 });
 
-// Insight 2 – Contractor SLA before/after
 new Chart(document.getElementById('insightChart2'), {
   type: 'doughnut',
   data: {
     labels: ['Compliant','Breached (others)','Breached (C+D)'],
     datasets: [{
       data: [65.3, 13.4, 21.3],
-      backgroundColor: [ACCENT, 'rgba(79,195,247,0.6)', ORANGE],
-      borderColor: 'rgba(8,12,18,0.5)', borderWidth: 3,
+      backgroundColor: [ACCENT, 'rgba(3,105,161,0.6)', WARN],
+      borderColor: '#ffffff', borderWidth: 3,
       hoverOffset: 4,
     }]
   },
@@ -1375,28 +1296,26 @@ new Chart(document.getElementById('insightChart2'), {
   }
 });
 
-// Insight 3 – Seasonal (multi-year)
 new Chart(document.getElementById('insightChart3'), {
   type: 'line',
   data: {
     labels: ['J','F','M','A','M','J','J','A','S','O','N','D'],
     datasets: [
-      { label: '2022', data: [2600,2500,1900,1400,1200,1100,1050,1100,1200,1400,1600,2100], borderColor: 'rgba(0,229,160,0.4)', borderWidth: 1.5, pointRadius: 0, tension: 0.4 },
-      { label: '2023', data: [2750,2620,2000,1500,1280,1150,1100,1150,1280,1500,1700,2200], borderColor: 'rgba(0,229,160,0.65)', borderWidth: 1.5, pointRadius: 0, tension: 0.4 },
+      { label: '2022', data: [2600,2500,1900,1400,1200,1100,1050,1100,1200,1400,1600,2100], borderColor: 'rgba(37,99,235,0.35)', borderWidth: 1.5, pointRadius: 0, tension: 0.4 },
+      { label: '2023', data: [2750,2620,2000,1500,1280,1150,1100,1150,1280,1500,1700,2200], borderColor: 'rgba(37,99,235,0.6)', borderWidth: 1.5, pointRadius: 0, tension: 0.4 },
       { label: '2024', data: [2900,2750,2100,1600,1350,1300,1200,1280,1400,1580,1850,2350], borderColor: ACCENT, borderWidth: 2.5, pointRadius: 2, tension: 0.4 },
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { display: false }, ticks: { color: '#556677' } },
-      y: { grid: { color: gridColor }, ticks: { color: '#556677' } }
+      x: { grid: { display: false } },
+      y: { grid: { color: gridColor } }
     },
     plugins: { legend: { position: 'bottom', labels: { padding: 12, usePointStyle: true, font:{size:10} } } }
   }
 });
 
-// Insight 4 – Hotspot breakdown
 new Chart(document.getElementById('insightChart4'), {
   type: 'bar',
   data: {
@@ -1404,16 +1323,16 @@ new Chart(document.getElementById('insightChart4'), {
     datasets: [{
       label: 'Share of total incidents %',
       data: [9.2, 7.8, 6.1, 18.9, 58.0],
-      backgroundColor: [ORANGE, ORANGE, ORANGE, 'rgba(0,229,160,0.5)', 'rgba(0,229,160,0.25)'],
-      borderRadius: 6, borderSkipped: false,
+      backgroundColor: [WARN, WARN, WARN, 'rgba(37,99,235,0.5)', 'rgba(37,99,235,0.2)'],
+      borderRadius: 5, borderSkipped: false,
     }]
   },
   options: {
     indexAxis: 'y',
     responsive: true, maintainAspectRatio: false,
     scales: {
-      x: { grid: { color: gridColor }, ticks: { color: '#556677' }, max: 65 },
-      y: { grid: { display: false }, ticks: { color: '#556677' } }
+      x: { grid: { color: gridColor }, max: 65 },
+      y: { grid: { display: false } }
     },
     plugins: { legend: { display: false } }
   }
