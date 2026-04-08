@@ -5,14 +5,26 @@ This module turns processed tables into analysis-ready frames:
 - ward/suburb aggregations
 - hotspot tables
 """
+import pandas as pd
+from pathlib import Path
+import sys
+
+if __package__ in (None, ""):
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.config.settings import SETTINGS
 from src.utils.io import read_csv, write_csv
-import pandas as pd
 
 def build_incident_features() -> pd.DataFrame:
     proc = SETTINGS.data_processed
-    inc = read_csv(proc / "fact_incident.csv")
-    wo = read_csv(proc / "fact_work_order.csv")
+    inc = read_csv(
+        proc / "fact_incident.csv",
+        usecols=["incident_id", "reported_at", "closed_at", "expected_sla_hours"],
+    )
+    wo = read_csv(
+        proc / "fact_work_order.csv",
+        usecols=["incident_id", "created_at", "arrived_at", "completed_at"],
+    )
 
     # Join first work order timestamps
     wo_first = (
@@ -37,7 +49,7 @@ def build_incident_features() -> pd.DataFrame:
 def main() -> None:
     df = build_incident_features()
     write_csv(df, SETTINGS.data_processed / "incident_features.csv")
-    print("Wrote incident_features.csv ✅")
+    print("Wrote incident_features.csv")
 
 if __name__ == "__main__":
     main()

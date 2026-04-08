@@ -17,9 +17,13 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 import random
 from pathlib import Path
+import sys
 
 import numpy as np
 import pandas as pd
+
+if __package__ in (None, ""):
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 from src.config.settings import SETTINGS
 from src.utils.io import write_csv, ensure_dir
@@ -293,7 +297,7 @@ def main(seed: int, rows: int) -> None:
     write_csv(fact_work_order, raw_dir / "fact_work_order.csv")
     write_csv(fact_inspection, raw_dir / "fact_inspection.csv")
 
-    print(f"Generated RAW tables into {raw_dir} ✅")
+    print(f"Generated RAW tables into {raw_dir}")
 
 
 if __name__ == "__main__":

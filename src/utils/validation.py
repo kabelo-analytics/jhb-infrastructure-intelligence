@@ -5,6 +5,11 @@ Run:
 """
 from pathlib import Path
 import pandas as pd
+import sys
+
+if __package__ in (None, ""):
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.config.settings import SETTINGS
 from src.utils.io import read_csv
 
@@ -47,7 +52,7 @@ def main() -> None:
     wo_con = wo.dropna(subset=["contractor_id"])
     assert_fk(wo_con, "contractor_id", con, "contractor_id", "fact_work_order", "dim_contractor")
 
-    print("Validation OK ✅")
+    print("Validation OK")
 
 
 if __name__ == "__main__":

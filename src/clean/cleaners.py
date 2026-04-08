@@ -3,9 +3,15 @@
 Run:
     python src/clean/cleaners.py
 """
+import pandas as pd
+from pathlib import Path
+import sys
+
+if __package__ in (None, ""):
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.config.settings import SETTINGS
 from src.utils.io import read_csv, write_csv
-import pandas as pd
 
 def clean_locations(df: pd.DataFrame) -> pd.DataFrame:
     out = df.copy()
@@ -55,7 +61,7 @@ def main() -> None:
     write_csv(con, proc / "dim_contractor.csv")
     write_csv(insp, proc / "fact_inspection.csv")
 
-    print("Cleaned + wrote processed tables ✅")
+    print("Cleaned and wrote processed tables")
 
 
 if __name__ == "__main__":
